@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Serve assets from /public without moving files.
+RewriteRule ^assets/(.*)$ public/assets/$1 [L,NC]
+
+# Route all other requests through the root front controller.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
