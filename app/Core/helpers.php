@@ -9,7 +9,13 @@ function h(?string $value): string
 
 function url(string $path = ''): string
 {
-    $base = rtrim(Config::get('app.url', ''), '/');
+    $base = rtrim((string) Config::get('app.url', ''), '/');
+    if ($base === '') {
+        $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+        $base = $scheme . '://' . $host . ($scriptDir !== '' ? $scriptDir : '');
+    }
     $path = '/' . ltrim($path, '/');
     return $base . $path;
 }
