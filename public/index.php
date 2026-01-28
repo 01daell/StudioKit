@@ -8,13 +8,15 @@ use App\Core\Session;
 use App\Core\Config;
 use App\Core\Installer;
 
-require_once __DIR__ . '/../app/Core/helpers.php';
-require_once __DIR__ . '/../app/Core/Autoload.php';
+$basePath = is_dir(__DIR__ . '/../app') ? realpath(__DIR__ . '/..') : realpath(__DIR__);
+
+require_once $basePath . '/app/Core/helpers.php';
+require_once $basePath . '/app/Core/Autoload.php';
 
 App\Core\Autoload::register();
 
 Session::start();
-Config::load(__DIR__ . '/../config/config.php');
+Config::load($basePath . '/config/config.php');
 
 $request = Request::capture();
 $response = new Response();
@@ -22,6 +24,6 @@ $router = new Router($request, $response);
 
 Installer::guard($request, $response);
 
-require_once __DIR__ . '/../app/routes.php';
+require_once $basePath . '/app/routes.php';
 
 $router->dispatch();
