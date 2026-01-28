@@ -14,6 +14,9 @@ function url(string $path = ''): string
         $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
         $scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+        if (str_ends_with($scriptDir, '/install')) {
+            $scriptDir = rtrim(substr($scriptDir, 0, -strlen('/install')), '/');
+        }
         $base = $scheme . '://' . $host . ($scriptDir !== '' ? $scriptDir : '');
     }
     $path = '/' . ltrim($path, '/');

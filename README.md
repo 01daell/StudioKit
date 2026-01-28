@@ -108,6 +108,8 @@ vendor/
    - Open `https://yourdomain.com/studiokit/install` in the browser.
 4. **Complete the wizard**
    - Enter database credentials, SMTP details, and Stripe keys.
+5. **Remove the installer directory**
+   - Delete the `/install` directory after install for extra security.
 5. **Sign in**
    - After completion, go to `/sign-in`.
 
@@ -126,4 +128,3 @@ vendor/
 - Use the **New Brand Kit** button from the dashboard to create your first kit.
 - The **Share** tab generates a tokenized public URL for Pro+ workspaces.
 - The **Export** tab includes PDF (all plans) and ZIP (Pro+) actions.
-
